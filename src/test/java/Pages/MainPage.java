@@ -18,9 +18,19 @@ public class MainPage {
     @FindBy(css = "[title=\"Log in to your customer account\"]")
     private WebElement singInButton;
 
+    //wyszukiwanie produktu
+
+    @FindBy(css = "[alt=\"Brown bear printed sweater\"]")
+    private WebElement sweaterIcon;
+
     //metody potrzebne do zalogowania
 
     public void clickSingInButton() {
         singInButton.click();
+    }
+
+    //metody do dodanie produktu do koszyka
+    public void addSweater(){
+        sweaterIcon.click();
     }
 }

@@ -27,6 +27,10 @@ public class MyAccountPage {
     @FindBy(id = "address-link")
     private WebElement addAddressButton;
 
+    //elementy do przejścia na stronę główną
+    @FindBy(css = "[class=\"logo img-responsive\"]")
+    private WebElement myStoreButton;
+
     //metody potrzebne do zalogowania
     public void logIn(String email,String password) {
         emailField.sendKeys(email);
@@ -39,4 +43,8 @@ public class MyAccountPage {
         addAddressButton.click();
     }
 
+    //metody potrzebne do przejscia na stronę główną
+    public void clickMyStoreButton(){
+        myStoreButton.click();
+    }
 }
