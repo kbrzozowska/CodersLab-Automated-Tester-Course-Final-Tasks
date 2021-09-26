@@ -25,16 +25,16 @@ public class HummingBirdSweaterProductPage {
 
     //metody potrzebne do dodania produktu do koszyka
 
-    public void addProductWithParameters(String size){
+    public void addProductWithParameters(String size, String quantity) {
         Select mySize = new Select(selectSizeField);
         mySize.selectByVisibleText(size);
 
-//        selectQuantityField.clear();
-//        selectQuantityField.sendKeys(quantity);
-    }
-    public void clickAddToCart(){
-        addToCartButton.click();
+        selectQuantityField.clear();
+        selectQuantityField.sendKeys("value", quantity);
     }
 
+    public void clickAddToCart() {
+        addToCartButton.click();
+    }
 
 }

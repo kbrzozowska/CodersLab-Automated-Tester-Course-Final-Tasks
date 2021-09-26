@@ -53,16 +53,16 @@ public class NewOrderSteps {
         mainPage.addSweater();
     }
 
-    @And("user choose (.*) add product to the basket and goes to checkout")
-    public void addProduct(String size) {
+    @And("user choose (.*), (.*), add product to the basket and goes to checkout")
+    public void addProduct(String size, String quantity) {
         //strona produktu
         HummingBirdSweaterProductPage productPage = new HummingBirdSweaterProductPage(driver);
         //wybór rozmiaru i ilości z parametru
-        productPage.addProductWithParameters("M");
+        productPage.addProductWithParameters("M", "5");
         productPage.clickAddToCart();
 
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("myModalLabel")));
+        WebDriverWait wait1 = new WebDriverWait(driver, 15);
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id("myModalLabel")));
 
         ConfirmationPopUpPage confirmationPopUpPage = new ConfirmationPopUpPage(driver);
         confirmationPopUpPage.goToCheckout();
