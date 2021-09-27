@@ -57,22 +57,28 @@ public class NewOrderSteps {
     public void addProduct(String size, String quantity) {
         //strona produktu
         HummingBirdSweaterProductPage productPage = new HummingBirdSweaterProductPage(driver);
-        //wybór rozmiaru i ilości z parametru
+
+        //wybór rozmiaru i ilości z parametru (M i 5 szt)
         productPage.addProductWithParameters("M", "5");
         productPage.clickAddToCart();
 
-        WebDriverWait wait1 = new WebDriverWait(driver, 15);
-        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id("myModalLabel")));
+        //czekam na pojawienie się popUpa z potwierdzeniem
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("myModalLabel")));
 
+        //potwierdzenie w popUpie
         ConfirmationPopUpPage confirmationPopUpPage = new ConfirmationPopUpPage(driver);
         confirmationPopUpPage.goToCheckout();
 
+        //potwierdzenie w koszyku
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         shoppingCartPage.clickProceededToCheckout();
 
     }
+
     @And("user confirms address")
-    public void addressConfirmation(){
+    public void addressConfirmation() {
+        //Ascercje do napisania
     }
 
     @And("user choose delivery method Pick up in store, choose pay by Check and confirms order")
@@ -85,13 +91,14 @@ public class NewOrderSteps {
 
     @Then("user sees order confirmation")
     public void orderConfirmation() {
-
+        //Asercje do napisania
     }
 
     @And("screenshot is taken")
     public void takeScreenShoot() throws Exception {
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
 
+        //file path do poprawy
         shoppingCartPage.takeSnapShot(driver, "c://test.png");
 
     }

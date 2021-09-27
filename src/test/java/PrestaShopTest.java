@@ -11,6 +11,6 @@ import org.openqa.selenium.WebDriver;
         glue = {"Steps"},
         plugin = {"pretty","html:out"})
 
-public class AddAddress {
+public class PrestaShopTest {
     private WebDriver driver;
 }
