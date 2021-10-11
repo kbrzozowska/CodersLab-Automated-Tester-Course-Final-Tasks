@@ -120,7 +120,7 @@ public class NewOrderSteps {
         OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(driver);
 
         //screenshot test.png
-        orderConfirmationPage.takeSnapShot(driver, "screenshot://test.png");
+        orderConfirmationPage.takeSnapShot(driver, "screenshot//test.png");
 
     }
 

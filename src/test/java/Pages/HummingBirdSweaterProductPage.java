@@ -30,7 +30,7 @@ public class HummingBirdSweaterProductPage {
         mySize.selectByVisibleText(size);
 
         int quantityToInt = Integer.parseInt(quantity);
-        for (int i = 0; i < quantityToInt; i++) {
+        for (int i = 0; i < quantityToInt-1; i++) {
             quantityUp.click();
         }
     }

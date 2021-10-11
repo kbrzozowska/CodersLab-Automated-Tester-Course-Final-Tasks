@@ -1,7 +1,7 @@
 #Feature: New Address
 #
 #  Scenario Outline: Adding new address
-#    Given user opens https://prod-kurs.coderslab.pl/ page
+#    Given user opens https://mystore-testlab.coderslab.pl/ page
 #    And user clicks on SingIn button
 #    And user enters email <email> and password <password> and click Signin button
 #    When user clicks "add first address" button

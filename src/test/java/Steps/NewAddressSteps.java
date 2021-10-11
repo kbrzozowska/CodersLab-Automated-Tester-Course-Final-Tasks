@@ -18,7 +18,7 @@
 //public class NewAddressSteps {
 //    private WebDriver driver;
 //
-//    @Given("user opens https://prod-kurs.coderslab.pl/ page")
+//    @Given("user opens https://mystore-testlab.coderslab.pl/ page")
 //    public void openMyStore() {
 //        // Skonfiguruj sterownik przeglądarki
 //        System.setProperty("webdriver.chrome.driver",
@@ -29,7 +29,7 @@
 //        //Ustaw czas oczekiwania na ładowanie elementów
 //        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        // Przejdź do strony
-//        driver.get("https://prod-kurs.coderslab.pl/");
+//        driver.get("https://mystore-testlab.coderslab.pl/");
 //
 //        MainPage mainPage = new MainPage(driver);
 //
