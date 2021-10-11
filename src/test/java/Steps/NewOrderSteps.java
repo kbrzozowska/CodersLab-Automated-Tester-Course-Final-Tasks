@@ -1,10 +1,12 @@
 package Steps;
 
 import Pages.*;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class NewOrderSteps {
     private WebDriver driver;
-    @Given("user opens https://prod-kurs.coderslab.pl/ page")
+    @Given("user opens https://mystore-testlab.coderslab.pl/ page")
     public void openMyStore() {
         // Skonfiguruj sterownik przeglądarki
         System.setProperty("webdriver.chrome.driver",
@@ -26,7 +28,7 @@ public class NewOrderSteps {
         //Ustaw czas oczekiwania na ładowanie elementów
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         // Przejdź do strony
-        driver.get("https://prod-kurs.coderslab.pl/");
+        driver.get("https://mystore-testlab.coderslab.pl/");
 
         MainPage mainPage = new MainPage(driver);
     }
@@ -58,16 +60,17 @@ public class NewOrderSteps {
         //strona produktu
         HummingBirdSweaterProductPage productPage = new HummingBirdSweaterProductPage(driver);
 
-        //wybór rozmiaru i ilości z parametru (M i 5 szt)
-        productPage.addProductWithParameters("M", "5");
+        //wybór rozmiaru i ilości z parametru (L i 2 szt)
+        productPage.addProductWithParameters("L", "2");
         productPage.clickAddToCart();
+        ConfirmationPopUpPage confirmationPopUpPage = new ConfirmationPopUpPage(driver);
 
         //czekam na pojawienie się popUpa z potwierdzeniem
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("myModalLabel")));
 
         //potwierdzenie w popUpie
-        ConfirmationPopUpPage confirmationPopUpPage = new ConfirmationPopUpPage(driver);
+
         confirmationPopUpPage.goToCheckout();
 
         //potwierdzenie w koszyku
@@ -76,30 +79,48 @@ public class NewOrderSteps {
 
     }
 
-    @And("user confirms address")
-    public void addressConfirmation() {
-        //Ascercje do napisania
+    @And("user confirms address alias (.*)")
+    public void addressConfirmation(String alias) {
+        OrderPage orderPage = new OrderPage(driver);
+
+        Assert.assertEquals(alias, orderPage.getAddressAlias());
+
     }
 
     @And("user choose delivery method Pick up in store, choose pay by Check and confirms order")
     public void paymentAndDeliveryMethods() {
-        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
-        shoppingCartPage.clickContinueButton();
-        shoppingCartPage.clickDelivery();
-        shoppingCartPage.paymentConfirmation();
+        OrderPage orderPage = new OrderPage(driver);
+        orderPage.clickContinueButton();
+
+        OrderPage orderPageDelivery = new OrderPage(driver);
+
+        //wait dla radio buttonów dostawy
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"js-delivery\"]/div/div[1]/div[1]/div/span/span")));
+
+        orderPageDelivery.clickDelivery();
+
+        OrderPage orderPagePayment = new OrderPage(driver);
+
+        //wait dla płatności
+        //WebDriverWait anotherWait = new WebDriverWait(driver, 20);
+        //anotherWait.until(ExpectedConditions.elementToBeClickable (By.id("payment-option-1")));
+        orderPagePayment.paymentConfirmation();
     }
 
     @Then("user sees order confirmation")
     public void orderConfirmation() {
-        //Asercje do napisania
+        OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(driver);
+
+        Assert.assertEquals("\uE876YOUR ORDER IS CONFIRMED", orderConfirmationPage.getOrderConfirmation());
     }
 
     @And("screenshot is taken")
     public void takeScreenShoot() throws Exception {
-        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(driver);
 
-        //file path do poprawy
-        shoppingCartPage.takeSnapShot(driver, "c://test.png");
+        //screenshot test.png
+        orderConfirmationPage.takeSnapShot(driver, "screenshot://test.png");
 
     }
 

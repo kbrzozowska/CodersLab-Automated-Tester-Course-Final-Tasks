@@ -11,10 +11,11 @@ public class ConfirmationPopUpPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-    @FindBy(linkText = "Proceed to checkout")
+    @FindBy(css = "[class=\"btn btn-primary\"]")
     private WebElement toCheckoutButton;
 
     public void goToCheckout(){
+
         toCheckoutButton.click();
     }
 }

@@ -17,8 +17,8 @@ public class HummingBirdSweaterProductPage {
     @FindBy(id="group_1")
     private WebElement selectSizeField;
 
-    @FindBy(id="quantity_wanted")
-    private WebElement selectQuantityField;
+    @FindBy(css ="[class=\"material-icons touchspin-up\"]")
+    private WebElement quantityUp;
 
     @FindBy(css = "[class=\"btn btn-primary add-to-cart\"]")
     private WebElement addToCartButton;
@@ -29,8 +29,10 @@ public class HummingBirdSweaterProductPage {
         Select mySize = new Select(selectSizeField);
         mySize.selectByVisibleText(size);
 
-        selectQuantityField.clear();
-        selectQuantityField.sendKeys("value", quantity);
+        int quantityToInt = Integer.parseInt(quantity);
+        for (int i = 0; i < quantityToInt; i++) {
+            quantityUp.click();
+        }
     }
 
     public void clickAddToCart() {
