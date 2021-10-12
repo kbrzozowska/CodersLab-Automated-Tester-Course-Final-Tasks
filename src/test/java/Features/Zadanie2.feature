@@ -10,6 +10,7 @@ Feature: New order
     And user choose delivery method Pick up in store, choose pay by Check and confirms order
     Then user sees order confirmation
     And screenshot is taken
+    And user goes back to account page and goes to order history
     And browser is closed
     Examples:
       | email                        | firstname | lastname | password | alias  |

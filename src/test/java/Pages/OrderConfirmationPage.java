@@ -22,6 +22,10 @@ public class OrderConfirmationPage {
     @FindBy(css = "[class=\"h1 card-title\"]")
     private WebElement orderConfirmation;
 
+    //do powrotu do main page
+    @FindBy(className = "account")
+    private WebElement myAccountButton;
+
     //metody do potwiedzenia zamówienia
 
     //tekst z nagłówka powtwierdzenia
@@ -38,5 +42,10 @@ public class OrderConfirmationPage {
         File DestFile = new File(fileWithPath);
         //Copy file at destination
         FileUtils.copyFile(SrcFile, DestFile);
+    }
+
+    //metody do powrotu do strony użytkownika
+    public void clickMyAccount(){
+        myAccountButton.click();
     }
 }

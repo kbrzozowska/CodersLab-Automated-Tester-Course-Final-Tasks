@@ -31,6 +31,10 @@ public class MyAccountPage {
     @FindBy(css = "[class=\"logo img-responsive\"]")
     private WebElement myStoreButton;
 
+    //elemety do sprawdzenia statusu zamowienia
+    @FindBy(id = "history-link")
+    private WebElement orderHistoryButton;
+
     //metody potrzebne do zalogowania
     public void logIn(String email,String password) {
         emailField.sendKeys(email);
@@ -46,5 +50,10 @@ public class MyAccountPage {
     //metody potrzebne do przejscia na stronę główną
     public void clickMyStoreButton(){
         myStoreButton.click();
+    }
+
+    //metoda do przejcia do historii zamówień
+    public void toOrderHistory(){
+        orderHistoryButton.click();
     }
 }

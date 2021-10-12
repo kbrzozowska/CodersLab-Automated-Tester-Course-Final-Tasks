@@ -124,6 +124,15 @@ public class NewOrderSteps {
 
     }
 
+    @And("user goes back to account page and goes to order history")
+    public void toOrderHistory(){
+        OrderConfirmationPage orderConfirmationPage = new OrderConfirmationPage(driver);
+        orderConfirmationPage.clickMyAccount();
+
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        myAccountPage.toOrderHistory();
+    }
+
     @And("browser is closed")
     public void browserClosing() {
         driver.quit();
